@@ -1,0 +1,21 @@
+<!-- donations-index -->
+<div class="row mt-4">
+    <div class="col-lg-6 offset-lg-3">
+        <h1>Donations</h1>
+        <a href="/events/new" class="btn btn-primary">New Donation</a>
+
+        {{#each donations}}
+          <div class="card mt-3">
+            <img class="card-img-top" src="{{this.imgUrl}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{this.title}}</h5>
+              <p class="card-text">{{this.desc}}</p>
+              <div class="text-right">
+                <a href="/donations/{{this.id}}" class="btn btn-secondary">Edit</a>
+                <a href="/donations/{{this.id}}" class="btn btn-primary">View</a>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+    </div>
+</div>
