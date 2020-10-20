@@ -75,6 +75,16 @@ app.put('/donations/:id', (req, res) => {
   });
 });
 
+// DELETE
+app.delete('/donations/:id', (req, res) => {
+  models.Donation.findByPk(req.params.id).then(donation => {
+    donation.destroy();
+    res.redirect(`/`);
+  }).catch((err) => {
+    console.log(err);
+  });
+})
+
 // Choose a port to listen on
 const port = process.env.PORT || 3000;
 
