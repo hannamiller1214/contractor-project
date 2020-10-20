@@ -1,5 +1,6 @@
 // Initialize express
 const express = require('express')
+const methodOverride = require('method-override')
 const app = express()
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
@@ -10,6 +11,7 @@ const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-acce
 app.engine('handlebars', exphbs({ defaultLayout: 'main', handlebars: allowInsecurePrototypeAccess(Handlebars) }));
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'))
 
 // // OUR MOCK ARRAY OF PROJECTS
 // var donations = [
@@ -50,6 +52,28 @@ app.get('/donations/:id', (req, res) => {
     console.log(err.message);
   })
 })
+
+// EDIT
+app.get('/donations/:id/edit', (req, res) => {
+  models.Donation.findByPk(req.params.id).then((donation) => {
+    res.render('donations-edit', { donation: donation });
+  }).catch((err) => {
+    console.log(err.message);
+  })
+});
+
+// UPDATE
+app.put('/donations/:id', (req, res) => {
+  models.Donation.findByPk(req.params.id).then(donation => {
+    donation.update(req.body).then(donation => {
+      res.redirect(`/donations/${req.params.id}`);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }).catch((err) => {
+    console.log(err);
+  });
+});
 
 // Choose a port to listen on
 const port = process.env.PORT || 3000;
