@@ -1,0 +1,22 @@
+<!-- views/donations-new.handlebars -->
+
+<form method="POST" action="/donations">
+  <fieldset>
+    <legend>New Donation</legend>
+    <!-- TITLE -->
+    <p>
+      <label for="title">Organization</label><br>
+      <input type="text" name="title" />
+    </p>
+    <p>
+      <label for="desc">Amount</label><br>
+      <input type="text" name="desc" />
+    </p>
+  </fieldset>
+
+  <!-- BUTTON -->
+  <p>
+    <button type="submit">Save Donation</button>
+  </p>
+
+</form>
