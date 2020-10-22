@@ -12,11 +12,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-        Endorsement.associate = function(models) {
-          Endorsement.belongsTo(models.Donation); // DonationId
-        };
+      // define association here
     }
   };
+  
   Endorsement.init({
     name: DataTypes.STRING,
     email: DataTypes.STRING
@@ -24,5 +23,11 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Endorsement',
   });
+
+  Endorsement.associate = function(models) {
+    Endorsement.belongsTo(models.Donation); // EventId
+  };
+
   return Endorsement;
+
 };

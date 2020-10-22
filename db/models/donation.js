@@ -12,11 +12,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-        Donation.associate = function(models) {
-          Donation.hasMany(models.Endorsement);
-        };
+      // define association here
     }
   };
+  
   Donation.init({
     title: DataTypes.STRING,
     desc: DataTypes.TEXT
@@ -24,5 +23,11 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Donation',
   });
+
+  Donation.associate = function(models) {
+    Donation.hasMany(models.Endorsement);
+  };
+
   return Donation;
+
 };
