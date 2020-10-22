@@ -18,5 +18,13 @@ module.exports = (app, models) => {
     });
   });
 
-  // DESTROY
+  // DELETE
+  app.delete('/donations/:donationId/endorsements/:id', (req, res) => {
+      models.Endorsement.findByPk(req.params.id).then(endorsement => {
+          endorsement.destroy();
+          res.redirect(`/donations/${req.params.donationId}`);
+      }).catch((err) => {
+          console.log(err);
+      });
+  });
 }
