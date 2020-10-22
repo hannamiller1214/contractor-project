@@ -25,15 +25,12 @@ module.exports = function (app, models) {
 
     // SHOW
     app.get('/donations/:id', (req, res) => {
-      // Search for the donation by its id that was passed in via req.params
-      models.Donation.findByPk(req.params.id).then((donation) => {
-        // If the id is for a valid donation, show it
-        res.render('donations-show', { donation: donation })
-      }).catch((err) => {
-        // if they id was for a donation not in our db, log an error
-        console.log(err.message);
-      })
-    })
+        models.Donation.findByPk(req.params.id, { include: [{ model: models.Endorsement }] }).then(donation => {
+            res.render('donations-show', { donation: donation });
+        }).catch((err) => {
+            console.log(err.message);
+        })
+    });
 
     // EDIT
     app.get('/donations/:id/edit', (req, res) => {

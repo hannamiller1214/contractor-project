@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 
 require('./controllers/donations')(app, models);
+require('./controllers/endorsements')(app, models);
 
 // // OUR MOCK ARRAY OF PROJECTS
 // var donations = [
