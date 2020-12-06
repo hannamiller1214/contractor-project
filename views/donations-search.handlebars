@@ -1,0 +1,22 @@
+<!-- donations-search -->
+<div class="row mt-4">
+    <div class="col-lg-6 offset-lg-3">
+        <h1>Donation Search</h1>
+
+        <div class="mt-5">
+            {{#each donations}}
+              <div class="card mt-3">
+                <div class="card-body">
+                  <h5 class="card-title">{{this.title}}</h5>
+                  <p class="card-text">{{this.desc}}</p>
+                  <div class="text-right">
+                    <a href="/donations/{{this.id}}/edit" class="btn btn-secondary">Edit</a>
+                    <a href="/donations/{{this.id}}" class="btn btn-primary">View</a>
+                    <a href="/donations/{{this.id}}/endorsements/new" class="btn btn-info">Endorse</a>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

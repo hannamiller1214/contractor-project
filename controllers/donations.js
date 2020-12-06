@@ -1,5 +1,8 @@
 //donations.js
 
+const Sequelize = require("sequelize")
+const Op = Sequelize.Op;
+
 module.exports = function (app, models) {
 
     // INDEX
@@ -63,4 +66,17 @@ module.exports = function (app, models) {
         console.log(err);
       });
     })
+
+    // Search
+    app.post('/donations/search', (req, res) => {
+      models.Donation.findAll({
+        where: {
+          title: {
+            [Op.iLike]: `%${req.body.q}`         // LIKE '%hat'
+          }
+        }
+      }).then(donations => {
+        res.render('donations-search', { donations: donations });
+      })
+    });
 }
